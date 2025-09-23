@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" parallel="tests" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="2" parallel="tests" name="SearchTest(failed)">
+    <classes>
+      <class name="tests.SearchTest">
+        <methods>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="searchProduct" invocation-numbers="0 1 2"/>
+        </methods>
+      </class> <!-- tests.SearchTest -->
+    </classes>
+  </test> <!-- SearchTest(failed) -->
+</suite> <!-- Failed suite [Suite] -->
