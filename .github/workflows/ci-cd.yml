@@ -40,7 +40,7 @@ jobs:
 
     # Step 6: Upload Allure report as artifact
     - name: Upload Allure Report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: allure-report
         path: target/site/allure-maven-plugin
@@ -61,7 +61,7 @@ jobs:
 
     # Step 8: Deploy Allure Report to GitHub Pages
     - name: Deploy Allure Report to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v6
+      uses: peaceiris/actions-gh-pages@v3.9.3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: target/site/allure-maven-plugin
