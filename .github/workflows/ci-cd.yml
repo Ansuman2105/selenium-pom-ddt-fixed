@@ -58,10 +58,11 @@ jobs:
         from: ${{ secrets.EMAIL_USER }}
         body: "Tests completed. Please check the Allure report attached."
         attachments: target/site/allure-maven-plugin/*
-	# Workflow step to publish Allure
-		- name: Deploy Allure Report to GitHub Pages
-		  uses: peaceiris/actions-gh-pages@v6
-		  with:
-		    github_token: ${{ secrets.GITHUB_TOKEN }}
-		    publish_dir: target/site/allure-maven-plugin
-		    publish_branch: gh-pages
+
+    # Step 8: Deploy Allure Report to GitHub Pages
+    - name: Deploy Allure Report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v6
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: target/site/allure-maven-plugin
+        publish_branch: gh-pages
