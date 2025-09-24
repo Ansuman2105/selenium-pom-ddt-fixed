@@ -33,19 +33,20 @@ jobs:
     - name: Run TestNG Tests
       run: mvn test
 
-    # Step 5: Generate Allure report
+    # Step 5: Generate Allure report (optional, won't fail build)
     - name: Generate Allure Report
       run: mvn allure:report
       continue-on-error: true
 
-    # Step 6: Upload Allure report as artifact
+    # Step 6: Upload Allure report as artifact (optional)
     - name: Upload Allure Report
       uses: actions/upload-artifact@v4
+      if: success() || failure()   # run regardless of test status
       with:
         name: allure-report
         path: target/site/allure-maven-plugin
 
-    # Step 7: Send Email Notification
+    # Step 7: Send Email Notification (optional attachment handling)
     - name: Send Email Notification
       uses: dawidd6/action-send-mail@v3
       with:
@@ -59,9 +60,10 @@ jobs:
         body: "Tests completed. Please check the Allure report attached."
         attachments: target/site/allure-maven-plugin/*
 
-    # Step 8: Deploy Allure Report to GitHub Pages
+    # Step 8: Deploy Allure Report to GitHub Pages (optional, won't fail build)
     - name: Deploy Allure Report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3.9.3
+      if: success() || failure()   # deploy even if report gen fails
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: target/site/allure-maven-plugin
