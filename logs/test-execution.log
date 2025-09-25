@@ -1556,3 +1556,85 @@
 [2025-09-26 01:01:36] [INFO ] DriverFactory - Driver quit successfully.
 [2025-09-26 01:01:36] [INFO ] BaseTest - WebDriver closed successfully.
 [2025-09-26 01:01:36] [INFO ] BaseTest - ========== Test Suite Completed ==========
+[2025-09-26 01:24:42] [INFO ] BaseTest - Set Allure results directory to target/allure-results
+[2025-09-26 01:24:43] [INFO ] BaseTest - ========== Test Setup Started ==========
+[2025-09-26 01:24:43] [INFO ] BaseTest - Loaded browser from config: chrome
+[2025-09-26 01:24:43] [INFO ] DriverFactory - Initializing driver with options for browser: chrome
+[2025-09-26 01:24:45] [INFO ] DriverFactory - ChromeDriver (with options) initialized successfully.
+[2025-09-26 01:24:45] [INFO ] DriverFactory - Browser window maximized.
+[2025-09-26 01:24:45] [INFO ] BaseTest - WebDriver initialized for browser: chrome
+[2025-09-26 01:24:45] [INFO ] SearchTest - Navigating to base URL: https://tutorialsninja.com/demo/index.php
+[2025-09-26 01:24:47] [INFO ] SearchTest - Searching for product: iPhone
+[2025-09-26 01:24:48] [INFO ] SearchTest - ✅ PASS: iPhone is displayed in search results
+[2025-09-26 01:24:48] [INFO ] BaseTest - ========== Test Teardown Started ==========
+[2025-09-26 01:24:48] [INFO ] DriverFactory - Quitting the driver...
+[2025-09-26 01:24:48] [INFO ] DriverFactory - Driver quit successfully.
+[2025-09-26 01:24:48] [INFO ] BaseTest - WebDriver closed successfully.
+[2025-09-26 01:24:48] [INFO ] BaseTest - ========== Test Setup Started ==========
+[2025-09-26 01:24:48] [INFO ] BaseTest - Loaded browser from config: chrome
+[2025-09-26 01:24:48] [INFO ] DriverFactory - Initializing driver with options for browser: chrome
+[2025-09-26 01:24:49] [INFO ] DriverFactory - ChromeDriver (with options) initialized successfully.
+[2025-09-26 01:24:49] [INFO ] DriverFactory - Browser window maximized.
+[2025-09-26 01:24:49] [INFO ] BaseTest - WebDriver initialized for browser: chrome
+[2025-09-26 01:24:49] [INFO ] SearchTest - Navigating to base URL: https://tutorialsninja.com/demo/index.php
+[2025-09-26 01:24:50] [INFO ] SearchTest - Searching for product: Palm Treo Pro
+[2025-09-26 01:24:51] [INFO ] SearchTest - ✅ PASS: Palm Treo Pro is displayed in search results
+[2025-09-26 01:24:51] [INFO ] BaseTest - ========== Test Teardown Started ==========
+[2025-09-26 01:24:51] [INFO ] DriverFactory - Quitting the driver...
+[2025-09-26 01:24:52] [INFO ] DriverFactory - Driver quit successfully.
+[2025-09-26 01:24:52] [INFO ] BaseTest - WebDriver closed successfully.
+[2025-09-26 01:24:52] [INFO ] BaseTest - ========== Test Setup Started ==========
+[2025-09-26 01:24:52] [INFO ] BaseTest - Loaded browser from config: chrome
+[2025-09-26 01:24:52] [INFO ] DriverFactory - Initializing driver with options for browser: chrome
+[2025-09-26 01:24:53] [INFO ] DriverFactory - ChromeDriver (with options) initialized successfully.
+[2025-09-26 01:24:53] [INFO ] DriverFactory - Browser window maximized.
+[2025-09-26 01:24:53] [INFO ] BaseTest - WebDriver initialized for browser: chrome
+[2025-09-26 01:24:53] [INFO ] SearchTest - Navigating to base URL: https://tutorialsninja.com/demo/index.php
+[2025-09-26 01:24:54] [INFO ] SearchTest - Searching for product: Pixel 9
+[2025-09-26 01:25:05] [ERROR] SearchTest - ❌ FAIL: Pixel 9 not displayed in search results
+[2025-09-26 01:25:05] [INFO ] BaseTest - ========== Test Teardown Started ==========
+[2025-09-26 01:25:05] [INFO ] DriverFactory - Quitting the driver...
+[2025-09-26 01:25:05] [INFO ] DriverFactory - Driver quit successfully.
+[2025-09-26 01:25:05] [INFO ] BaseTest - WebDriver closed successfully.
+[2025-09-26 01:25:05] [INFO ] BaseTest - ========== Test Suite Completed ==========
+[2025-09-26 01:27:38] [INFO ] BaseTest - Set Allure results directory to target/allure-results
+[2025-09-26 01:27:39] [INFO ] BaseTest - ========== Test Setup Started ==========
+[2025-09-26 01:27:39] [INFO ] BaseTest - Loaded browser from config: chrome
+[2025-09-26 01:27:39] [INFO ] DriverFactory - Initializing driver with options for browser: chrome
+[2025-09-26 01:27:42] [INFO ] DriverFactory - ChromeDriver (with options) initialized successfully.
+[2025-09-26 01:27:42] [INFO ] DriverFactory - Browser window maximized.
+[2025-09-26 01:27:42] [INFO ] BaseTest - WebDriver initialized for browser: chrome
+[2025-09-26 01:27:42] [INFO ] SearchTest - Navigating to base URL: https://tutorialsninja.com/demo/index.php
+[2025-09-26 01:27:43] [INFO ] SearchTest - Searching for product: iPhone
+[2025-09-26 01:27:44] [INFO ] SearchTest - ✅ PASS: iPhone is displayed in search results
+[2025-09-26 01:27:44] [INFO ] BaseTest - ========== Test Teardown Started ==========
+[2025-09-26 01:27:44] [INFO ] DriverFactory - Quitting the driver...
+[2025-09-26 01:27:44] [INFO ] DriverFactory - Driver quit successfully.
+[2025-09-26 01:27:44] [INFO ] BaseTest - WebDriver closed successfully.
+[2025-09-26 01:27:44] [INFO ] BaseTest - ========== Test Setup Started ==========
+[2025-09-26 01:27:44] [INFO ] BaseTest - Loaded browser from config: chrome
+[2025-09-26 01:27:44] [INFO ] DriverFactory - Initializing driver with options for browser: chrome
+[2025-09-26 01:27:46] [INFO ] DriverFactory - ChromeDriver (with options) initialized successfully.
+[2025-09-26 01:27:46] [INFO ] DriverFactory - Browser window maximized.
+[2025-09-26 01:27:46] [INFO ] BaseTest - WebDriver initialized for browser: chrome
+[2025-09-26 01:27:46] [INFO ] SearchTest - Navigating to base URL: https://tutorialsninja.com/demo/index.php
+[2025-09-26 01:27:47] [INFO ] SearchTest - Searching for product: Palm Treo Pro
+[2025-09-26 01:27:47] [INFO ] SearchTest - ✅ PASS: Palm Treo Pro is displayed in search results
+[2025-09-26 01:27:47] [INFO ] BaseTest - ========== Test Teardown Started ==========
+[2025-09-26 01:27:47] [INFO ] DriverFactory - Quitting the driver...
+[2025-09-26 01:27:47] [INFO ] DriverFactory - Driver quit successfully.
+[2025-09-26 01:27:47] [INFO ] BaseTest - WebDriver closed successfully.
+[2025-09-26 01:27:47] [INFO ] BaseTest - ========== Test Setup Started ==========
+[2025-09-26 01:27:47] [INFO ] BaseTest - Loaded browser from config: chrome
+[2025-09-26 01:27:47] [INFO ] DriverFactory - Initializing driver with options for browser: chrome
+[2025-09-26 01:27:49] [INFO ] DriverFactory - ChromeDriver (with options) initialized successfully.
+[2025-09-26 01:27:49] [INFO ] DriverFactory - Browser window maximized.
+[2025-09-26 01:27:49] [INFO ] BaseTest - WebDriver initialized for browser: chrome
+[2025-09-26 01:27:49] [INFO ] SearchTest - Navigating to base URL: https://tutorialsninja.com/demo/index.php
+[2025-09-26 01:27:50] [INFO ] SearchTest - Searching for product: Pixel 9
+[2025-09-26 01:28:00] [ERROR] SearchTest - ❌ FAIL: Pixel 9 not displayed in search results
+[2025-09-26 01:28:00] [INFO ] BaseTest - ========== Test Teardown Started ==========
+[2025-09-26 01:28:00] [INFO ] DriverFactory - Quitting the driver...
+[2025-09-26 01:28:01] [INFO ] DriverFactory - Driver quit successfully.
+[2025-09-26 01:28:01] [INFO ] BaseTest - WebDriver closed successfully.
+[2025-09-26 01:28:01] [INFO ] BaseTest - ========== Test Suite Completed ==========

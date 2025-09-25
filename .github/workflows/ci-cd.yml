@@ -24,16 +24,22 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Step 3: Run Build + Tests
+      # ✅ Step 3: Install Chrome (needed for Selenium tests)
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      # Step 4: Run Build + Tests
       - name: Build & Run Tests
         run: mvn clean test
 
-      # Step 4: Generate Allure Report
+      # Step 5: Generate Allure Report
       - name: Generate Allure Report
         run: mvn allure:report
         continue-on-error: true
 
-      # Step 5: Upload Allure report as artifact
+      # Step 6: Upload Allure report as artifact
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         if: success() || failure()
@@ -41,7 +47,7 @@ jobs:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      # Step 6: Send Email Notification (optional)
+      # Step 7: Send Email Notification (optional)
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
         with:
@@ -50,12 +56,12 @@ jobs:
           username: ${{ secrets.EMAIL_USER }}
           password: ${{ secrets.EMAIL_PASS }}
           subject: "Test Automation Report"
-          to: "recipient@example.com"   # replace with recipient email
+          to: "nansuman2@gmail.com"
           from: ${{ secrets.EMAIL_USER }}
           body: "Tests completed. Please check the attached Allure report."
           attachments: target/site/allure-maven-plugin/*
 
-      # Step 7: Deploy Allure Report to GitHub Pages
+      # Step 8: Deploy Allure Report to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3.9.3
         if: success() || failure()

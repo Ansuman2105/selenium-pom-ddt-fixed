@@ -1,39 +1,36 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Suite" parallel="tests" thread-count="2">
+<suite name="Suite">
 
-    <!-- Register Allure Listener 
+    <!-- Register Allure Listener (optional, uncomment if needed)
     <listeners>
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
-    </listeners>-->
-	<test name="SearchTest">
+    </listeners> -->
+
+    <!-- Main Search Test -->
+    <test name="SearchTest">
         <classes>
             <class name="tests.SearchTest"/>
         </classes>
     </test>
-    
-    <!-- Example Tests -->
-    <!--
+
+    <!-- Example Tests (uncomment when ready)
     <test name="LoginTests">
         <classes>
             <class name="tests.LoginTest"/>
         </classes>
     </test>
-    -->
 
-    <!--
     <test name="Home Page Tests">
         <classes>
             <class name="tests.HomePageTest"/>
         </classes>
     </test>
-    -->
 
-    <!--<test name="SanityTest">
+    <test name="SanityTest">
         <classes>
             <class name="tests.SanityTest"/>
         </classes>
-    </test>-->
-
-    
+    </test>
+    -->
 
 </suite>
