@@ -24,16 +24,38 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Step 3: Run Build + Tests + Verify (for Allure report)
+      # Step 3: Run Build + Tests + Verify (ensures Allure report phase runs)
       - name: Build & Run Tests
         run: mvn clean test verify
 
-      # Step 4: Generate Allure Report
+      # Step 4: Debug - List Results
+      - name: Debug Allure Results
+        run: |
+          echo "Checking allure-results..."
+          ls -R target/allure-results || echo "No allure-results found"
+          echo "Checking site folder..."
+          ls -R target/site || echo "No site folder found"
+
+      # Step 5: Generate Allure Report
       - name: Generate Allure Report
         run: mvn allure:report
         continue-on-error: true
 
-      # Step 5: Upload Allure report as artifact
+      # Step 6: Debug - List Allure Report
+      - name: Debug Allure Report
+        run: |
+          echo "Checking allure report folder..."
+          ls -R target/site/allure-maven-plugin || echo "No allure report generated"
+
+      # Step 7: Upload Allure results as artifact (optional, for local debugging)
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: allure-results
+          path: target/allure-results
+
+      # Step 8: Upload Allure report as artifact
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         if: success() || failure()
@@ -41,7 +63,7 @@ jobs:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      # Step 6: Send Email Notification (optional)
+      # Step 9: Send Email Notification (optional)
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
         with:
@@ -55,7 +77,7 @@ jobs:
           body: "Tests completed. Please check the attached Allure report."
           attachments: target/site/allure-maven-plugin/*
 
-      # Step 7: Deploy Allure Report to GitHub Pages
+      # Step 10: Deploy Allure Report to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3.9.3
         if: success() || failure()
