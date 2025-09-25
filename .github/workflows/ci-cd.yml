@@ -11,8 +11,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write   # ✅ allow pushing to gh-pages
 
     steps:
       # Step 1: Checkout the code
@@ -26,19 +24,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Step 3: Run Build + Tests
+      # Step 3: Run Build + Tests + Verify (for Allure report)
       - name: Build & Run Tests
-        run: mvn clean test
+        run: mvn clean test verify
 
       # Step 4: Generate Allure Report
       - name: Generate Allure Report
-        run: mvn allure:report   # ❌ removed continue-on-error
+        run: mvn allure:report
+        continue-on-error: true
 
-      # Step 5: Debug - List Allure files
-      - name: Debug - List Allure files
-        run: ls -R target/site/allure-maven-plugin || echo "Allure not generated"
-
-      # Step 6: Upload Allure report as artifact
+      # Step 5: Upload Allure report as artifact
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         if: success() || failure()
@@ -46,7 +41,7 @@ jobs:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      # Step 7: Send Email Notification (optional)
+      # Step 6: Send Email Notification (optional)
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
         with:
@@ -55,12 +50,12 @@ jobs:
           username: ${{ secrets.EMAIL_USER }}
           password: ${{ secrets.EMAIL_PASS }}
           subject: "Test Automation Report"
-          to: "nansuman2@gmail.com"
+          to: "nansuman2@gmail.com"   # replace with recipient email
           from: ${{ secrets.EMAIL_USER }}
           body: "Tests completed. Please check the attached Allure report."
           attachments: target/site/allure-maven-plugin/*
 
-      # Step 8: Deploy Allure Report to GitHub Pages
+      # Step 7: Deploy Allure Report to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3.9.3
         if: success() || failure()
