@@ -1,6 +1,5 @@
 name: Selenium Test Automation CI/CD
 
-# Trigger workflow on push to main or pull request
 on:
   push:
     branches:
@@ -14,57 +13,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    # Step 2: Set up JDK
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
+      # Step 2: Set up JDK
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
 
-    # Step 3: Build project with Maven
-    - name: Build project
-      run: mvn clean install
+      # Step 3: Run Build + Tests
+      - name: Build & Run Tests
+        run: mvn clean test
 
-    # Step 4: Run TestNG tests
-    - name: Run TestNG Tests
-      run: mvn test
+      # Step 4: Generate Allure Report
+      - name: Generate Allure Report
+        run: mvn allure:report
+        continue-on-error: true
 
-    # Step 5: Generate Allure report (optional, won't fail build)
-    - name: Generate Allure Report
-      run: mvn allure:report
-      continue-on-error: true
+      # Step 5: Upload Allure report as artifact
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: allure-report
+          path: target/site/allure-maven-plugin
 
-    # Step 6: Upload Allure report as artifact (optional)
-    - name: Upload Allure Report
-      uses: actions/upload-artifact@v4
-      if: success() || failure()   # run regardless of test status
-      with:
-        name: allure-report
-        path: target/site/allure-maven-plugin
+      # Step 6: Send Email Notification (optional)
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USER }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "Test Automation Report"
+          to: "recipient@example.com"   # replace with recipient email
+          from: ${{ secrets.EMAIL_USER }}
+          body: "Tests completed. Please check the attached Allure report."
+          attachments: target/site/allure-maven-plugin/*
 
-    # Step 7: Send Email Notification (optional attachment handling)
-    - name: Send Email Notification
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.gmail.com
-        server_port: 465
-        username: ${{ secrets.EMAIL_USER }}
-        password: ${{ secrets.EMAIL_PASS }}
-        subject: "Test Automation Report"
-        to: "recipient@example.com"  # replace with recipient email
-        from: ${{ secrets.EMAIL_USER }}
-        body: "Tests completed. Please check the Allure report attached."
-        attachments: target/site/allure-maven-plugin/*
-
-    # Step 8: Deploy Allure Report to GitHub Pages (optional, won't fail build)
-    - name: Deploy Allure Report to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3.9.3
-      if: success() || failure()   # deploy even if report gen fails
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: target/site/allure-maven-plugin
-        publish_branch: gh-pages
+      # Step 7: Deploy Allure Report to GitHub Pages
+      - name: Deploy Allure Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        if: success() || failure()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: target/site/allure-maven-plugin
+          publish_branch: gh-pages
