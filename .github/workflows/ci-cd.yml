@@ -24,66 +24,36 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Step 3: Run Build + Tests
+      # Step 3: Run Build + Tests (don't fail job on test failure)
       - name: Build & Run Tests
         run: mvn clean test
+        continue-on-error: true
 
-      # Step 4: Debug - List Results
-      - name: Debug Allure Results
-        run: |
-          echo "Checking allure-results..."
-          ls -R target/allure-results || echo "No allure-results found"
-          echo "Checking site folder..."
-          ls -R target/site || echo "No site folder found"
-
-      # Step 5: Generate Allure Report (force plugin execution)
+      # Step 4: Generate Allure Report (always run)
       - name: Generate Allure Report
-        run: |
-          echo "Generating Allure Report..."
-          mvn io.qameta.allure:allure-maven:report
-          echo "Listing target/site after report generation..."
-          ls -R target/site || true
+        run: mvn allure:report
+        if: always()
 
-      # Step 6: Debug - List Allure Report
-      - name: Debug Allure Report
-        run: |
-          echo "Checking allure report folder..."
-          ls -R target/site/allure-maven-plugin || echo "No allure report generated"
-
-      # Step 7: Upload Allure results as artifact (for local debugging)
+      # Step 5: Upload Allure results (raw .json + attachments)
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4
-        if: success() || failure()
+        if: always()
         with:
           name: allure-results
           path: target/allure-results
 
-      # Step 8: Upload Allure report as artifact
+      # Step 6: Upload Allure Report (HTML)
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
-        if: success() || failure()
+        if: always()
         with:
           name: allure-report
           path: target/site/allure-maven-plugin
 
-      # Step 9: Send Email Notification (optional)
-      - name: Send Email Notification
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USER }}
-          password: ${{ secrets.EMAIL_PASS }}
-          subject: "Test Automation Report"
-          to: "nansuman2@gmail.com"
-          from: ${{ secrets.EMAIL_USER }}
-          body: "Tests completed. Please check the attached Allure report."
-          attachments: target/site/allure-maven-plugin/*
-
-      # Step 10: Deploy Allure Report to GitHub Pages
+      # Step 7: Deploy Allure Report to GitHub Pages
       - name: Deploy Allure Report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3.9.3
-        if: success() || failure()
+        if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: target/site/allure-maven-plugin

@@ -10,6 +10,9 @@ import org.openqa.selenium.chrome.ChromeOptions; // To configure Chrome browser 
 import org.openqa.selenium.firefox.FirefoxDriver; // Class to create a new Firefox browser session.
 import io.github.bonigarcia.wdm.WebDriverManager; // A library that automatically manages WebDriver binaries.
 
+import java.nio.file.Files; // For creating temporary directories
+import java.nio.file.Path;
+
 public class DriverFactory {
 
     // A private static variable to hold the single WebDriver instance (singleton pattern).
@@ -44,7 +47,16 @@ public class DriverFactory {
                 options.addArguments("--no-sandbox");                  // Required in CI to run Chrome
                 options.addArguments("--disable-dev-shm-usage");       // Prevents memory issues in containers
                 options.addArguments("--remote-allow-origins=*");      // Required for Chrome 111+
-                options.addArguments("--user-data-dir=/tmp/chrome-profile"); // ✅ unique profile to fix "session not created"
+
+                try {
+                    // ✅ Create a unique temporary Chrome profile directory
+                    Path tempDir = Files.createTempDirectory("chrome-profile");
+                    options.addArguments("--user-data-dir=" + tempDir.toString());
+                    logger.info("Using temporary Chrome profile at: {}", tempDir.toString());
+                } catch (Exception e) {
+                    logger.error("Failed to create temp Chrome profile directory: {}", e.getMessage());
+                }
+
             } else {
                 logger.info("Running locally. Using default Chrome options.");
             }
